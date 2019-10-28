@@ -1,0 +1,25 @@
+@import '../../../styles.scss';
+
+.Rectangle {
+    @include row;
+    background-color: #414452;
+    color: var(--white);
+    height: 64px;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.Copyright {
+    width: 266px;
+    height: 24px;
+    font-family: SourceSansPro;
+    font-size: 14px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.71;
+    letter-spacing: normal;
+    text-align: right;
+    color: var(--silver);
+    margin-right: 25px;
+  }

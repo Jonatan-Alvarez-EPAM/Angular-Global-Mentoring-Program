@@ -1,0 +1,84 @@
+@import '../../../../styles.scss';
+
+.Rectangle {
+  @include column;
+  border-radius: 8px;
+  box-shadow: 0 1px 24px 0 rgba(18, 21, 35, 0.08);
+  background-color: var(--white);
+  padding: 12px 24px;
+  margin: 24px 0;
+}
+
+.content {
+  @include row;
+  align-items: center;
+}
+
+.item-header {
+  @include row;
+  align-items: center;
+}
+.name {
+  flex-grow: 2;
+  width: 263px;
+  height: 30px;
+  font-family: SourceSansPro;
+  font-size: 24px;
+  font-weight: 600;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.25;
+  letter-spacing: normal;
+  color: var(--dark);
+}
+
+  .duration {
+    width: 49px;
+    height: 15px;
+    font-family: SourceSansPro;
+    font-size: 12px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: var(--cloudy-blue);
+  }
+
+  .date {
+    width: 58px;
+    height: 15px;
+    font-family: SourceSansPro;
+    font-size: 12px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: var(--cloudy-blue);
+  }
+
+  .description {
+    width: 801px;
+    font-family: SourceSansPro;
+    font-size: 14px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.71;
+    letter-spacing: normal;
+    color: var(--slate-grey);
+    flex-grow: 2;
+    text-align: justify;
+    padding-right: 25px;
+    padding-top: 7.5px;
+  }
+
+  .Mask {
+    width: 75px;
+    height: 24px;
+    border-radius: 3px;
+    background-color: var(--dark-sky-blue);
+    color: var(--white);
+    margin: 0 5px;
+  }

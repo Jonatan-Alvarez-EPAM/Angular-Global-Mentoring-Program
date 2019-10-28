@@ -1,0 +1,9 @@
+@import '../../../styles.scss';
+
+.Rectangle {
+  @include row;  
+  height: 64px;
+  background-color: var(--white);
+  align-items: center;
+  padding: 0 25px;
+}

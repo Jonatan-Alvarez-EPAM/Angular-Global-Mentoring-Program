@@ -1,1 +1,146 @@
-/* You can add global styles to this file, and also import other style files */
+@mixin column {
+  display: flex;
+  flex-direction: column;
+}
+
+@mixin row {
+  display: flex;
+  flex-direction: row;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+button {
+  border-color: transparent;
+}
+
+.HEADING-PROMO-H1-72-px {
+  font-family: SourceSansPro;
+  font-size: 72px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 0.58;
+  letter-spacing: normal;
+  color: var(--slate-grey);
+}
+
+.Text-Style-8 {
+  font-family: SourceSansPro;
+  font-size: 24px;
+  font-weight: 600;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.25;
+  letter-spacing: normal;
+  color: var(--dark);
+}
+
+ .Text-Style-4 {
+  font-family: SourceSansPro;
+  font-size: 18px;
+  font-weight: 600;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 2.56;
+  letter-spacing: -0.13px;
+  color: var(--white);
+}
+
+.Text-Style-6 {
+  font-family: Oswald;
+  font-size: 16px;
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: 0.25px;
+  color: var(--white);
+}
+
+.Text-Style-3 {
+  font-family: FontAwesome;
+  font-size: 16px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: var(--cloudy-blue);
+}
+
+.Text-Style-7 {
+  font-family: SourceSansPro;
+  font-size: 14px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: var(--white);
+}
+
+.Text-Style-5 {
+  font-family: SourceSansPro;
+  font-size: 14px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.71;
+  letter-spacing: 0.22px;
+  color: var(--silver);
+}
+
+.Text-Style-2 {
+  font-family: SourceSansPro;
+  font-size: 14px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.71;
+  letter-spacing: normal;
+  color: var(--slate-grey);
+}
+
+.Text-Style {
+  font-family: SourceSansPro;
+  font-size: 14px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: right;
+  color: var(--white);
+}
+
+.Sketch-Measure-Spacing {
+  font-family: HelveticaNeue;
+  font-size: 12px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: center;
+  color: var(--white);
+}
+
+:root {
+  --soft-blue: #577ce6;
+  --dark-sky-blue: #30b6dd;
+  --pale-grey: #f2f3f7;
+  --steel: #868996;
+  --silver: #c0c3ce;
+  --sick-green: #9bc837;
+  --cloudy-blue: #b9bdce;
+  --slate-grey: #525462;
+  --dark: #2c2f3c;
+  --black: #000000;
+  --pear: #e2f86a;
+  --seafoam-blue: #76cdd8;
+  --white: #ffffff;
+}

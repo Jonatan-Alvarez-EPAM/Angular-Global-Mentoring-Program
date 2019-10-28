@@ -13,4 +13,8 @@ export class MainSectionComponent implements OnInit {
   ngOnInit() {
   }
 
+  onSearch(event: Event) {
+    console.log('Searching for:', event);
+  }
+
 }

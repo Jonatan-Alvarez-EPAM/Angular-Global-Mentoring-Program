@@ -1,8 +1,16 @@
-<div>
+<div class="-List-course">
     <app-breadcrumbs-navbar></app-breadcrumbs-navbar>
-    <input type="text"placeholder="Text to search">
-    <button>Search</button>
-    <button>+ Add course</button>
+    <div class="container">
+        <div>
+            <input [(ngModel)]="searchTerm" type="text" placeholder="Text to search">
+            <button class="search-button" (click)="onSearch(searchTerm)">
+                Search
+            </button>
+        </div>
+        <div class="align-right">
+            <button class="add-course-button">+ Add course</button>
+        </div>
 
-    <app-courses-list></app-courses-list>
+        <app-courses-list></app-courses-list>
+    </div>
 </div>

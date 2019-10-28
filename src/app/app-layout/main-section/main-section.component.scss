@@ -1,0 +1,42 @@
+@import '../../../styles.scss';
+
+.container {
+  padding: 25px;
+}
+
+.-List-course {
+    background-color: var(--pale-grey);
+    @include column;
+  }
+
+  .search-button {
+    width: 100px;
+    height: 48px;
+    border-radius: 3px;
+    background-color: var(--sick-green);
+    color: var(--white);
+  }
+
+  input {
+    width: 360px;
+    height: 48px;
+    border-radius: 3px;
+    border: solid 1px #d9dbe3;
+    background-color: var(--white);
+    margin-right: 8px;
+    text-indent: 15px;
+  }
+
+  .add-course-button {
+    width: 138px;
+    height: 36px;
+    border-radius: 3px;
+    color: var(--white);
+    background-color: var(--dark-sky-blue);
+  }
+
+  .align-right {
+    @include row;
+    justify-content: flex-end;
+    margin-bottom: 10px;
+  }
