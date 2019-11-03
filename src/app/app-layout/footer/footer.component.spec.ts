@@ -22,4 +22,10 @@ describe('FooterComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+  it('should have the copyright text', () => {
+    const compiled = fixture.debugElement.nativeElement;
+    const copyright = compiled.querySelector('.copyright');
+    expect(copyright).toBeDefined();
+    expect(copyright.textContent).toEqual('Copyright 2019');
+  });
 });

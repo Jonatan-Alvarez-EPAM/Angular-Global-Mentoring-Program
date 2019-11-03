@@ -1,6 +1,6 @@
 @import '../../../../styles.scss';
 
-.Rectangle {
+.rectangle {
   @include column;
   border-radius: 8px;
   box-shadow: 0 1px 24px 0 rgba(18, 21, 35, 0.08);
@@ -74,7 +74,7 @@
     padding-top: 7.5px;
   }
 
-  .Mask {
+  .mask {
     width: 75px;
     height: 24px;
     border-radius: 3px;

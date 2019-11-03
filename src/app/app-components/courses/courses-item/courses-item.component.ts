@@ -1,5 +1,5 @@
 import { EventEmitter, Component, OnInit, Input, Output } from '@angular/core';
-import { Course } from 'src/app/app-models/course';
+import { Course } from '../../../../app/app-models/course';
 
 /** Displays all the datailed info for a given course. */
 @Component({
@@ -17,11 +17,11 @@ export class CoursesItemComponent implements OnInit {
   ngOnInit() {
   }
 
-  onEdit() {
+  onEdit(event: Event) {
     console.log('Empty handler for edit course button.');
   }
 
-  onDelete() {
+  onDelete(event: Event) {
     console.log('Empty handler for delete course button.');
     this.deleteCourse.emit(this.courseInfo.id);
   }
