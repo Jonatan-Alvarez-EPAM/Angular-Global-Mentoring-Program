@@ -1,8 +1,12 @@
-<div>
-    <span>{{courseInfo.title}} - </span>
-    <span>{{courseInfo.duration}} min - </span>
-    <span>{{courseInfo.creationDate | date:'d MMM, yyyy'}} - </span>
-    <span>{{courseInfo.description}} </span>
-    <button>Edit</button>
-    <button>Delete</button>
+<div class="Rectangle">
+    <div class="item-header">
+        <span class="name">{{courseInfo.title}}</span>
+        <span class="duration">{{courseInfo.duration}} min</span>
+        <span class="date">{{courseInfo.creationDate | date:'d MMM, yyyy'}}</span>
+    </div>
+    <div class="content">
+        <span class="description">{{courseInfo.description}} </span>
+        <button class="Mask" (click)="onEdit()">Edit</button>
+        <button class="Mask" (click)="onDelete()">Delete</button>
+    </div>
 </div>
