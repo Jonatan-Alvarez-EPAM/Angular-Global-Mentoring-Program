@@ -1,6 +1,6 @@
 @import '../../../styles.scss';
 
-.Rectangle {
+.rectangle {
   @include row;  
   height: 64px;
   background-color: var(--white);

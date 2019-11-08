@@ -1,6 +1,6 @@
 @import '../../../styles.scss';
 
-.Rectangle {
+.rectangle {
     @include row;
     background-color: #414452;
     color: var(--white);
@@ -9,7 +9,7 @@
     justify-content: flex-end;
 }
 
-.Copyright {
+.copyright {
     width: 266px;
     height: 24px;
     font-family: SourceSansPro;

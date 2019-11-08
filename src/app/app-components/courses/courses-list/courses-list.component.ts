@@ -22,21 +22,21 @@ export class CoursesListComponent implements OnInit {
     title: 'Course 1',
     creationDate: new Date(100000000),
     duration: 10,
-    description: 'Course 1 description... ' + this.LOREM_IPSUM,
+    description: `Course 1 description...${this.LOREM_IPSUM}`,
   };
   private readonly FAKE_COURSE_2 = {
     id: 'id_2',
     title: 'Course 2',
     creationDate: new Date(200000000),
     duration: 20,
-    description: 'Course 2 description...' + this.LOREM_IPSUM,
+    description: `Course 2 description...${this.LOREM_IPSUM}`,
   };
   private readonly FAKE_COURSE_3 = {
     id: 'id_3',
     title: 'Course 3',
     creationDate: new Date(300000000),
     duration: 30,
-    description: 'Course 3 description...' + this.LOREM_IPSUM,
+    description: `Course 3 description...${this.LOREM_IPSUM}`,
   };
   courses: Course[] = [];
 
