@@ -3,7 +3,7 @@
     <div class="container">
         <div>
             <input [(ngModel)]="searchTerm" type="text" placeholder="Text to search">
-            <button class="search-button" (click)="onSearch(searchTerm)">
+            <button [disabled]="!searchTerm" class="search-button" (click)="onSearch(searchTerm)">
                 Search
             </button>
         </div>
@@ -11,6 +11,6 @@
             <button class="add-course-button">+ Add course</button>
         </div>
 
-        <app-courses-list></app-courses-list>
+        <app-courses-list [filterTitle]="titleToSearch"></app-courses-list>
     </div>
 </div>

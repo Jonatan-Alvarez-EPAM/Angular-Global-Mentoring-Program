@@ -7,6 +7,19 @@
   background-color: var(--white);
   padding: 12px 24px;
   margin: 24px 0;
+  border: 2px solid transparent;
+
+  &.fresh {
+    border-color: var(--sick-green);
+  }
+
+  &.to-be-released {
+    border-color: var(--dark-sky-blue);
+  }
+
+  &.top-rated {
+    background-color: var(--pear);
+  }
 }
 
 .content {
@@ -20,7 +33,7 @@
 }
 .name {
   flex-grow: 2;
-  width: 263px;
+  width: 100%;
   height: 30px;
   font-family: SourceSansPro;
   font-size: 24px;
@@ -33,7 +46,7 @@
 }
 
   .duration {
-    width: 49px;
+    width: 90px;
     height: 15px;
     font-family: SourceSansPro;
     font-size: 12px;
@@ -46,7 +59,7 @@
   }
 
   .date {
-    width: 58px;
+    width: 90px;
     height: 15px;
     font-family: SourceSansPro;
     font-size: 12px;
@@ -81,4 +94,8 @@
     background-color: var(--dark-sky-blue);
     color: var(--white);
     margin: 0 5px;
+  }
+
+  .star {
+    height: 20px;
   }

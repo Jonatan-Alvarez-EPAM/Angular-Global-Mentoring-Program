@@ -1,7 +1,9 @@
-<div class="rectangle">
+<div class="rectangle" [appCourseStatus]="courseInfo.creationDate" [ngClass]="{'top-rated':courseInfo.topRated}">
     <div class="item-header">
-        <span class="name">{{courseInfo.title}}</span>
-        <span class="duration">{{courseInfo.duration}} min</span>
+        <span class="name">{{courseInfo.title | uppercase}}
+            <img *ngIf="courseInfo.topRated" class="star" src="assets/img/star.png">
+        </span>
+        <span class="duration">{{courseInfo.duration | duration}}</span>
         <span class="date">{{courseInfo.creationDate | date:'d MMM, yyyy'}}</span>
     </div>
     <div class="content">
