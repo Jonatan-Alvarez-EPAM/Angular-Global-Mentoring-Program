@@ -1,5 +1,5 @@
 import { EventEmitter, Component, OnInit, Input, Output } from '@angular/core';
-import { Course } from '../../../../app/app-models/course';
+import { Course } from '@app/app-models';
 
 /** Displays all the datailed info for a given course. */
 @Component({

@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./main-section.component.scss']
 })
 export class MainSectionComponent implements OnInit {
-
+  titleToSearch: string;
   constructor() { }
 
   ngOnInit() {
@@ -15,6 +15,7 @@ export class MainSectionComponent implements OnInit {
 
   onSearch(event: Event) {
     console.log('Searching for:', event);
+    this.titleToSearch = `${event}`;
   }
 
 }
