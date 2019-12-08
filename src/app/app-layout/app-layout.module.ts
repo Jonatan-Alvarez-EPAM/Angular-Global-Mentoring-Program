@@ -5,6 +5,7 @@ import { FooterComponent } from './footer/footer.component';
 import { MainSectionComponent } from './main-section/main-section.component';
 import { AppComponentsModule } from '../app-components/app-components.module';
 import { FormsModule } from '@angular/forms';
+import { AppServicesModule } from '../app-services/app-services.module';
 
 @NgModule({
   declarations: [HeaderComponent, FooterComponent, MainSectionComponent],
@@ -12,6 +13,7 @@ import { FormsModule } from '@angular/forms';
     CommonModule,
     AppComponentsModule,
     FormsModule,
+    AppServicesModule,
   ],
   exports: [HeaderComponent, FooterComponent, MainSectionComponent],
 })

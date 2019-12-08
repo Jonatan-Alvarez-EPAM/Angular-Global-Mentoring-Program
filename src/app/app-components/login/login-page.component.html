@@ -1,0 +1,13 @@
+<div class="login-container">
+    <div class="container">
+        <span class="login-text">Login</span>
+        <span>E-mail:</span>
+        <input [(ngModel)]="email" type="email" placeholder="example@mail.com">
+        <span>Password:</span>
+        <input [(ngModel)]="password" type="password" placeholder="*********">
+        <div class="actions">
+            <a href="/">Forgot password?</a>
+            <button (click)="onLogin()" class="login-button">Login</button>
+        </div>
+    </div>
+</div>
