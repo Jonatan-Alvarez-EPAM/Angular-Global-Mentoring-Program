@@ -1,4 +1,4 @@
-<div class="list-course">
+<div class="list-course" *ngIf="isUserAuthenticated">
     <app-breadcrumbs-navbar></app-breadcrumbs-navbar>
     <div class="container">
         <div>
@@ -13,4 +13,8 @@
 
         <app-courses-list [filterTitle]="titleToSearch"></app-courses-list>
     </div>
+</div>
+
+<div class="list-course" *ngIf="!isUserAuthenticated">
+    <app-login-page (loggedIn)="onLogIn()"></app-login-page>
 </div>

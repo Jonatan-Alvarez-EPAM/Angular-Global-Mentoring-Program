@@ -1,0 +1,57 @@
+@import '../../../styles.scss';
+
+:host { 
+    @include column;
+    justify-content: center;
+    min-height: inherit;
+ }
+
+.login-container {
+    @include row;
+    justify-content: center;
+}
+
+.container {
+    @include column;
+    background-color: var(--white);
+    padding: 20px 30px;
+
+    > span, div {
+        padding: 10px 0;
+    }
+}
+
+.actions {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+}
+
+.login-button {
+    width: 100px;
+    height: 48px;
+    border-radius: 3px;
+    background-color: var(--sick-green);
+    color: var(--white);
+    
+    &:disabled,
+    &[disabled] {
+      opacity: .54;
+    }
+  }
+
+  input {
+    width: 360px;
+    height: 48px;
+    border-radius: 3px;
+    border: solid 1px #d9dbe3;
+    background-color: var(--white);
+    text-indent: 15px;
+  }
+
+  .login-text {
+      font-size: 24px;
+      line-height: 30px;
+      font-weight: 600;
+      color: var(--dark);
+  }

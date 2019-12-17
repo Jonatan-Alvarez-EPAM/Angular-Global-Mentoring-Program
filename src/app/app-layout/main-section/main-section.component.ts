@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthorizationService } from '@app/app-services';
 
 /** Main display area. */
 @Component({
@@ -8,7 +9,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MainSectionComponent implements OnInit {
   titleToSearch: string;
-  constructor() { }
+  isUserAuthenticated = false;
+
+  constructor(authService: AuthorizationService) {
+    this.isUserAuthenticated = authService.isAuthenticated();
+  }
 
   ngOnInit() {
   }
@@ -16,6 +21,10 @@ export class MainSectionComponent implements OnInit {
   onSearch(event: Event) {
     console.log('Searching for:', event);
     this.titleToSearch = `${event}`;
+  }
+
+  onLogIn() {
+    this.isUserAuthenticated = true;
   }
 
 }
