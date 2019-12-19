@@ -12,7 +12,9 @@ import { AppLayoutModule } from './app-layout/app-layout.module';
     BrowserModule,
     AppLayoutModule,
   ],
-  providers: [],
+  providers: [
+    { provide: 'Storage', useValue: localStorage },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

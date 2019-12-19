@@ -1,0 +1,2 @@
+<input type="number" placeholder="minutes" [(ngModel)]="minutes" min="1">
+<span *ngIf="minutes">{{minutes | duration}}</span>
