@@ -1,5 +1,9 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Course } from '@app/app-models';
+import { Router, ActivatedRoute } from '@angular/router';
+import { CoursesService } from '@app/app-services';
+
+enum SavingModes { CREATE, UPDATE }
 
 @Component({
   selector: 'app-add-course',
@@ -11,15 +15,26 @@ export class AddCourseComponent implements OnInit {
   @Output() cancel = new EventEmitter<void>();
   @Output() save = new EventEmitter<Course>();
 
+  private savingMode = SavingModes.CREATE;
+  id?: string;
   title: string;
   description: string;
   date: Date;
   duration: number;
   courseInfo: Course;
 
-  constructor() { }
+  constructor(private readonly router: Router, private readonly route: ActivatedRoute, private readonly coursesService: CoursesService) { }
 
   ngOnInit() {
+    this.id = this.route.snapshot.paramMap.get('id');
+    if (this.id) {
+      this.savingMode = SavingModes.UPDATE;
+      const courseInfo = this.coursesService.get(this.id);
+      this.title = courseInfo.title;
+      this.duration = courseInfo.duration;
+      this.description = courseInfo.description;
+      this.date = courseInfo.creationDate;
+    }
   }
 
   onSave() {
@@ -34,10 +49,18 @@ export class AddCourseComponent implements OnInit {
       topRated: false,
     };
     this.save.emit(this.courseInfo);
+
+    if (this.savingMode === SavingModes.CREATE) {
+      this.coursesService.create(this.courseInfo);
+    } else {
+      this.coursesService.update(this.id, this.courseInfo);
+    }
+    this.router.navigate(['/courses']);
   }
 
   onCancel() {
     this.cancel.emit();
+    this.router.navigate(['/courses']);
   }
 
   onDateChange(date: Date) {

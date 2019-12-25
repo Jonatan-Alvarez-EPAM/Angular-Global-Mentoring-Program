@@ -1,0 +1,28 @@
+@import '../../../styles.scss';
+
+:host { 
+    @include column;
+    justify-content: center;
+    min-height: calc(100vh - 128px);
+ }
+
+.not-found-container {
+    @include row;
+    justify-content: center;
+}
+
+.container {
+    @include column;
+    background-color: var(--white);
+    padding: 20px 30px;
+}
+
+h1 {
+    text-align: center;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    width: 500px;
+}

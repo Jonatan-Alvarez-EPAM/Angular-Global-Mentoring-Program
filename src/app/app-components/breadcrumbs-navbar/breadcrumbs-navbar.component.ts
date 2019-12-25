@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { CoursesService } from '@app/app-services';
 
 /** Displays the current section the user is in. */
 @Component({
@@ -8,9 +10,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BreadcrumbsNavbarComponent implements OnInit {
 
-  constructor() { }
+  courseId?: string;
+  courseTitle?: string;
+  constructor(private readonly route: ActivatedRoute, private readonly coursesService: CoursesService) {
+  }
 
   ngOnInit() {
+    this.courseId = this.route.snapshot.paramMap.get('id');
+    if (this.courseId) {
+      const course = this.coursesService.get(this.courseId);
+      this.courseTitle = course.title;
+    }
   }
 
 }

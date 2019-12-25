@@ -1,26 +1,16 @@
-<div class="list-course" *ngIf="isUserAuthenticated">
+<div class="list-course">
     <app-breadcrumbs-navbar></app-breadcrumbs-navbar>
     <div class="container">
-        <ng-container *ngIf="!showAddCoursePage">
-            <div>
-                <input [(ngModel)]="searchTerm" type="text" placeholder="Text to search">
-                <button [disabled]="!searchTerm" class="search-button" (click)="onSearch(searchTerm)">
-                    Search
-                </button>
-            </div>
-            <div class="align-right">
-                <button class="add-course-button" (click)="onAddCourse()">+ Add course</button>
-            </div>
+        <div>
+            <input [(ngModel)]="searchTerm" type="text" placeholder="Text to search">
+            <button [disabled]="!searchTerm" class="search-button" (click)="onSearch(searchTerm)">
+                Search
+            </button>
+        </div>
+        <div class="align-right">
+            <button class="add-course-button" (click)="onAddCourse()">+ Add course</button>
+        </div>
 
-            <app-courses-list [filterTitle]="titleToSearch"></app-courses-list>
-        </ng-container>
-
-        <ng-container *ngIf="showAddCoursePage">
-            <app-add-course (cancel)="onCancel()" (save)="onSave($event)"></app-add-course>
-        </ng-container>
+        <app-courses-list [filterTitle]="titleToSearch"></app-courses-list>
     </div>
-</div>
-
-<div class="list-course" *ngIf="!isUserAuthenticated">
-    <app-login-page (loggedIn)="onLogIn()"></app-login-page>
 </div>

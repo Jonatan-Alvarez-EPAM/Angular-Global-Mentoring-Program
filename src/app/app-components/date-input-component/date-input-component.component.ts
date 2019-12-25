@@ -8,6 +8,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 })
 export class DateInputComponentComponent implements OnInit {
 
+  @Input()
   set date(d: Date) {
     this.dateChange.emit(d);
   }

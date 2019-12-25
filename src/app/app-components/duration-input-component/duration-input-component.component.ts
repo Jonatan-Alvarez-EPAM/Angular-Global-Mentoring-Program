@@ -8,6 +8,7 @@ import { Component, EventEmitter, OnInit, Input, Output } from '@angular/core';
 export class DurationInputComponentComponent implements OnInit {
   private duration: number;
 
+  @Input()
   set minutes(duration: number) {
     this.duration = duration;
     this.durationChange.emit(duration);

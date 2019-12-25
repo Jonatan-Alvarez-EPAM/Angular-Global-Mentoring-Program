@@ -6,9 +6,14 @@
     min-height: inherit;
  }
 
+ .add-course {
+    background-color: var(--pale-grey);
+    @include column;
+    min-height: calc(100vh - 128px);
+  }
+
 .container {
     @include column;
-    background-color: var(--white);
     padding: 20px 30px;
 
     > span, div {
