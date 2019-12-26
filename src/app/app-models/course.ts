@@ -1,9 +1,9 @@
 /** App-wide model to handle courses info. */
 export interface Course {
     id: string;
-    title: string;
-    creationDate: Date;
-    duration: number;
+    name: string;
+    date: Date;
+    length: number;
     description: string;
-    topRated: boolean;
+    isTopRated: boolean;
 }

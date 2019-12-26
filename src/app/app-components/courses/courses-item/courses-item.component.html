@@ -1,10 +1,10 @@
-<div class="rectangle" [appCourseStatus]="courseInfo.creationDate" [ngClass]="{'top-rated':courseInfo.topRated}">
+<div class="rectangle" [appCourseStatus]="courseInfo.date" [ngClass]="{'top-rated':courseInfo.isTopRated}">
     <div class="item-header">
-        <span class="name">{{courseInfo.title | uppercase}}
-            <img *ngIf="courseInfo.topRated" class="star" src="assets/img/star.png">
+        <span class="name">{{courseInfo.name | uppercase}}
+            <img *ngIf="courseInfo.isTopRated" class="star" src="assets/img/star.png">
         </span>
-        <span class="duration">{{courseInfo.duration | duration}}</span>
-        <span class="date">{{courseInfo.creationDate | date:'d MMM, yyyy'}}</span>
+        <span class="duration">{{courseInfo.length | duration}}</span>
+        <span class="date">{{courseInfo.date | date:'d MMM, yyyy'}}</span>
     </div>
     <div class="content">
         <span class="description">{{courseInfo.description}} </span>

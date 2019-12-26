@@ -18,27 +18,27 @@ export class CoursesService {
 
   private readonly FAKE_COURSE_1 = {
     id: 'id_1',
-    title: 'Course 1',
-    creationDate: yesterdayWithoutTime(),
-    duration: 90,
+    name: 'Course 1',
+    date: yesterdayWithoutTime(),
+    length: 90,
     description: `Course 1 description...${this.LOREM_IPSUM}`,
-    topRated: false,
+    isTopRated: false,
   };
   private readonly FAKE_COURSE_2 = {
     id: 'id_2',
-    title: 'Course 2',
-    creationDate: tomorrowWithoutTime(),
-    duration: 60,
+    name: 'Course 2',
+    date: tomorrowWithoutTime(),
+    length: 60,
     description: `Course 2 description...${this.LOREM_IPSUM}`,
-    topRated: false,
+    isTopRated: false,
   };
   private readonly FAKE_COURSE_3 = {
     id: 'id_3',
-    title: 'Course 3',
-    creationDate: todayWithoutTime(),
-    duration: 30,
+    name: 'Course 3',
+    date: todayWithoutTime(),
+    length: 30,
     description: `Course 3 description...${this.LOREM_IPSUM}`,
-    topRated: true,
+    isTopRated: true,
   };
 
   private courses: Course[] = [];
