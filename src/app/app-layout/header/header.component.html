@@ -1,14 +1,17 @@
 <div class="bg">
   <img src="assets/img/logo.png" srcset="assets/img/logo@2x.png 2x,
              assets/img/logo@3x.png 3x" class="logo">
+  <div *ngIf="userInfo$ | async" class="user-info">
+    Welcome&nbsp;{{userInfo.name.first}}&nbsp;{{userInfo.name.last}}!
+  </div>
   <div class="row">
-    <div class="action" (click)="onLogIn()" *ngIf="!isUserAuthenticated">
+    <div class="action" (click)="onLogIn()" *ngIf="!(isUserAuthenticated$|async)">
       <img src="assets/img/ic-user.png" srcset="assets/img/ic-user@2x.png 2x,
              assets/img/ic-user@3x.png 3x" class="ic_user">
       <span class="user-login">User login</span>
     </div>
 
-    <div class="action" (click)="onLogOff()" *ngIf="isUserAuthenticated">
+    <div class="action" (click)="onLogOff()" *ngIf="isUserAuthenticated$ | async">
       <img src="assets/img/ic-exit.png" srcset="assets/img/ic-exit@2x.png 2x,
              assets/img/ic-exit@3x.png 3x" class="ic_exit">
       <span class="log-off">Log off</span>

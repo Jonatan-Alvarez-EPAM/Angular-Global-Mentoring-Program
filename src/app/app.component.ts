@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { OverlayService } from '@app/app-services/overlay.service';
+import { Observable } from 'rxjs';
+import { distinctUntilChanged } from 'rxjs/operators';
 
 /** Main app component. */
 @Component({
@@ -8,4 +11,9 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'Angular Mentoring Program 2019';
+  displayOverlay$: Observable<boolean>;
+
+  constructor(private readonly overlayService: OverlayService) {
+    this.displayOverlay$ = overlayService.showOverlay$.asObservable().pipe(distinctUntilChanged());
+  }
 }
