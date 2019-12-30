@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
 import { User } from '@app/app-models';
 
 @Injectable({
@@ -8,7 +8,7 @@ export class AuthorizationService {
 
   private readonly KEY = 'CURRENT_USER';
 
-  constructor(private localStorage: Storage) {
+  constructor(@Inject('Storage') private readonly localStorage: Storage) {
     //localStorage.clear();
   }
 

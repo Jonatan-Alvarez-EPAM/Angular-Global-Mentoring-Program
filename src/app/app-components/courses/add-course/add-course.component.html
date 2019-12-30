@@ -1,0 +1,18 @@
+<div class="add-course-container">
+    <div class="container">
+        <span>Title:</span>
+        <input [(ngModel)]="title" type="text" placeholder="Add title">
+        <span>Description:</span>
+        <textarea [(ngModel)]="description" placeholder="Add description"></textarea>
+        <span>Date:</span>
+        <app-date-input-component (dateChange)="onDateChange($event)"></app-date-input-component>
+        <span>Duration:</span>
+        <app-duration-input-component (durationChange)="onDurationChange($event)"></app-duration-input-component>
+        <span>Authors:</span>
+        <input type="text" placeholder="Oops! this is temporarily disabled..." disabled>
+        <div class="actions">
+            <button (click)="onSave()" class="save-button" [disabled]="!enableSaveButton()">Save</button>
+            <button (click)="onCancel()" class="cancel-button">Cancel</button>
+        </div>
+    </div>
+</div>

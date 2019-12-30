@@ -8,9 +8,20 @@ import { AppPipesModule } from '../app-pipes/app-pipes.module';
 import { AppServicesModule } from '../app-services/app-services.module';
 import { LoginPageComponent } from './login/login-page.component';
 import { FormsModule } from '@angular/forms';
+import { AddCourseComponent } from './courses/add-course/add-course.component';
+import { DateInputComponentComponent } from './date-input-component/date-input-component.component';
+import { DurationInputComponentComponent } from './duration-input-component/duration-input-component.component';
 
 @NgModule({
-  declarations: [BreadcrumbsNavbarComponent, CoursesItemComponent, CoursesListComponent, LoginPageComponent],
+  declarations: [
+    BreadcrumbsNavbarComponent,
+    CoursesItemComponent,
+    CoursesListComponent,
+    LoginPageComponent,
+    AddCourseComponent,
+    DateInputComponentComponent,
+    DurationInputComponentComponent,
+  ],
   imports: [
     CommonModule,
     AppDirectivesModule,
@@ -18,6 +29,14 @@ import { FormsModule } from '@angular/forms';
     AppServicesModule,
     FormsModule,
   ],
-  exports: [BreadcrumbsNavbarComponent, CoursesListComponent, CoursesItemComponent, LoginPageComponent],
+  exports: [
+    BreadcrumbsNavbarComponent,
+    CoursesListComponent,
+    CoursesItemComponent,
+    LoginPageComponent,
+    AddCourseComponent,
+    DateInputComponentComponent,
+    DurationInputComponentComponent,
+  ],
 })
 export class AppComponentsModule { }
