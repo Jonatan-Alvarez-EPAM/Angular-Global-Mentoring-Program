@@ -1,3 +1,4 @@
 <div class="rectangle">
-    <span>Courses</span>
+    <span><a routerLink="/courses">Courses</a></span>
+    <span *ngIf="courseId">&nbsp;/&nbsp;{{courseTitle}}</span>
 </div>

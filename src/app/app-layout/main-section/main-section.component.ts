@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthorizationService, CoursesService } from '@app/app-services';
 import { Course } from '@app/app-models';
+import { Router } from '@angular/router';
 
 /** Main display area. */
 @Component({
@@ -14,8 +15,7 @@ export class MainSectionComponent implements OnInit {
   searchTerm: string;
   showAddCoursePage = false;
 
-  constructor(authService: AuthorizationService, private readonly courseService: CoursesService) {
-    this.isUserAuthenticated = authService.isAuthenticated();
+  constructor(authService: AuthorizationService, private readonly courseService: CoursesService, private readonly router: Router) {
   }
 
   ngOnInit() {
@@ -26,21 +26,7 @@ export class MainSectionComponent implements OnInit {
     this.titleToSearch = `${event}`;
   }
 
-  onLogIn() {
-    this.isUserAuthenticated = true;
-  }
-
   onAddCourse() {
-    this.showAddCoursePage = true;
+    this.router.navigate(['/courses/new']);
   }
-
-  onCancel() {
-    this.showAddCoursePage = false;
-  }
-
-  onSave(course: Course) {
-    this.courseService.create(course);
-    this.showAddCoursePage = false;
-  }
-
 }
