@@ -11,6 +11,8 @@ import { FormsModule } from '@angular/forms';
 import { AddCourseComponent } from './courses/add-course/add-course.component';
 import { DateInputComponentComponent } from './date-input-component/date-input-component.component';
 import { DurationInputComponentComponent } from './duration-input-component/duration-input-component.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { AppComponentsRoutingModule } from './app-components-routing.module';
 
 @NgModule({
   declarations: [
@@ -21,6 +23,7 @@ import { DurationInputComponentComponent } from './duration-input-component/dura
     AddCourseComponent,
     DateInputComponentComponent,
     DurationInputComponentComponent,
+    PageNotFoundComponent,
   ],
   imports: [
     CommonModule,
@@ -28,6 +31,7 @@ import { DurationInputComponentComponent } from './duration-input-component/dura
     AppPipesModule,
     AppServicesModule,
     FormsModule,
+    AppComponentsRoutingModule,
   ],
   exports: [
     BreadcrumbsNavbarComponent,
@@ -37,6 +41,7 @@ import { DurationInputComponentComponent } from './duration-input-component/dura
     AddCourseComponent,
     DateInputComponentComponent,
     DurationInputComponentComponent,
+    PageNotFoundComponent,
   ],
 })
 export class AppComponentsModule { }

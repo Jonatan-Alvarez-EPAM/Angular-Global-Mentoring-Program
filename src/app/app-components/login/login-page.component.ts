@@ -1,5 +1,6 @@
 import { Component, Output, EventEmitter } from '@angular/core';
 import { AuthorizationService } from '@app/app-services';
+import { Router } from '@angular/router';
 
 /** Login form. */
 @Component({
@@ -13,10 +14,11 @@ export class LoginPageComponent {
     password: string;
     @Output() loggedIn = new EventEmitter<void>();
 
-    constructor(private readonly authService: AuthorizationService) { }
+    constructor(private readonly authService: AuthorizationService, private readonly router: Router) { }
 
     onLogin() {
         this.authService.login();
         this.loggedIn.emit();
+        this.router.navigate(['/courses']);
     }
 }

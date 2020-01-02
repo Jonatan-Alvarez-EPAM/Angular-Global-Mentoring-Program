@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthorizationService } from '@app/app-services';
+import { Router } from '@angular/router';
 
 /** App-wide header. */
 @Component({
@@ -12,7 +13,7 @@ export class HeaderComponent implements OnInit {
   isUserAuthenticated = false;
 
   constructor(
-    private authService: AuthorizationService) {
+    private authService: AuthorizationService, private readonly router: Router) {
     this.isUserAuthenticated = authService.isAuthenticated();
   }
 
@@ -28,6 +29,6 @@ export class HeaderComponent implements OnInit {
   onLogOff() {
     this.authService.logout();
     this.isUserAuthenticated = false;
-    console.log('[FAKE] logging off...');
+    this.router.navigate(['/login']);
   }
 }

@@ -1,5 +1,6 @@
 import { EventEmitter, Component, OnInit, Input, Output, ChangeDetectionStrategy } from '@angular/core';
 import { Course } from '@app/app-models';
+import { Router } from '@angular/router';
 
 /** Displays all the datailed info for a given course. */
 @Component({
@@ -13,17 +14,16 @@ export class CoursesItemComponent implements OnInit {
   @Input() courseInfo: Course;
   @Output() deleteCourse = new EventEmitter<string>();
 
-  constructor() { }
+  constructor(private readonly router: Router) { }
 
   ngOnInit() {
   }
 
   onEdit(event: Event) {
-    console.log('Empty handler for edit course button.');
+    this.router.navigate(['courses', this.courseInfo.id]);
   }
 
   onDelete(event: Event) {
-    console.log('Empty handler for delete course button.');
     this.deleteCourse.emit(this.courseInfo.id);
   }
 }

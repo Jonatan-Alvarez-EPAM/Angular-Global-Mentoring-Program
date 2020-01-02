@@ -8,11 +8,15 @@
 
 .login-container {
     @include row;
+    align-items: center;
     justify-content: center;
+    background-color: var(--pale-grey);
+    min-height: calc(100vh - 128px);
 }
 
 .container {
     @include column;
+    height: fit-content;
     background-color: var(--white);
     padding: 20px 30px;
 
