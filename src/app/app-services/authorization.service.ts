@@ -13,11 +13,11 @@ export class AuthorizationService {
   readonly TOKEN = 'TOKEN';
   token?: string;
 
-  constructor(@Inject('Storage') private readonly localStorage: Storage,
+  constructor(
+    @Inject('Storage') private readonly localStorage: Storage,
     @Inject('BASE_URL') private readonly BASE_URL: string,
-    private readonly httpClient: HttpClient) {
-    //localStorage.clear();
-  }
+    private readonly httpClient: HttpClient
+  ) { }
 
   login(login?: string, password?: string) {
     const currentUser = this.localStorage.getItem(this.USER);

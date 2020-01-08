@@ -7,7 +7,9 @@ import { AuthorizationService } from './authorization.service';
 export class AuthInterceptor implements HttpInterceptor {
     constructor(
         private readonly authService: AuthorizationService,
-        @Inject('Storage') private readonly localStorage: Storage) { }
+        @Inject('Storage') private readonly localStorage: Storage
+    ) { }
+
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         // Clone the request and replace the original headers with
         // cloned headers, updated with the authorization.

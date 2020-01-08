@@ -1,9 +1,9 @@
-import { Inject, Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Course } from '@app/app-models';
 import { OrderByPipe, FilterByPipe } from '@app/app-pipes';
-import { HttpClient } from '@angular/common/http';
-import { Observable, zip, of } from 'rxjs';
-import { map, switchMap, catchError } from 'rxjs/operators';
+import { CoursesService } from '@app/app-services';
+import { Observable, zip } from 'rxjs';
+import { map, switchMap } from 'rxjs/operators';
 
 /** Displays all the existing courses. */
 @Component({
@@ -15,17 +15,14 @@ import { map, switchMap, catchError } from 'rxjs/operators';
 export class CoursesListComponent implements OnInit {
   @Input() set filterTitle(filterTitle: string) {
     if (filterTitle) {
-      this.courses$ = this.httpClient.get<Course[]>(`${this.BASE_URL}/courses`, {
-        params: { textFragment: filterTitle }
-      });
+      this.courses$ = this.coursesService.list({ textFragment: filterTitle });
     }
   }
-  courses$: Observable<Course[]> = of();
+  courses$: Observable<Course[]>;
   private readonly pageSize = 5;
   private pageIndex = 0;
 
-  constructor(@Inject('BASE_URL') private readonly BASE_URL: string,
-    private readonly httpClient: HttpClient) {
+  constructor(private readonly coursesService: CoursesService) {
     this.courses$ = this.loadByPage(this.previousPage(), this.nextPage())
       .pipe(map((courses: Course[]) => new OrderByPipe().transform(courses)));
   }
@@ -35,13 +32,12 @@ export class CoursesListComponent implements OnInit {
   onDeleteItem(idCourse: string) {
     if (confirm('Do you really want to delete this course?')) {
       // ToDo: Implement deleteById in BE.
-      this.courses$ = this.httpClient.delete(`${this.BASE_URL}/courses`, {
-        params: { id: idCourse }
-      }).pipe(switchMap(() => {
-        this.pageIndex = 0;
-        return this.loadByPage(this.previousPage(), this.nextPage())
-          .pipe(map((courses: Course[]) => new OrderByPipe().transform(courses)));
-      }));
+      this.courses$ =
+        this.coursesService.delete(idCourse).pipe(switchMap(() => {
+          this.pageIndex = 0;
+          return this.loadByPage(this.previousPage(), this.nextPage())
+            .pipe(map((courses: Course[]) => new OrderByPipe().transform(courses)));
+        }));
     }
   }
 
@@ -53,9 +49,7 @@ export class CoursesListComponent implements OnInit {
   }
 
   private loadByPage(start: string, count: string): Observable<Course[]> {
-    return this.httpClient.get<Course[]>(`${this.BASE_URL}/courses`, {
-      params: { start, count }
-    });
+    return this.coursesService.list({ start, count });
   }
 
   private previousPage(): string {
