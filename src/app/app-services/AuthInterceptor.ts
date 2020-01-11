@@ -10,7 +10,9 @@ export class AuthInterceptor implements HttpInterceptor {
     constructor(
         private readonly overlayService: OverlayService,
         private readonly authService: AuthorizationService,
-        @Inject('Storage') private readonly localStorage: Storage) { }
+        @Inject('Storage') private readonly localStorage: Storage
+    ) { }
+
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         this.overlayService.showOverlay$.next(true);
         // Clone the request and replace the original headers with

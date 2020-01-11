@@ -15,10 +15,11 @@ export class AuthorizationService {
   userInfo$: Subject<User> | BehaviorSubject<User>;
   isAuthenticated$: BehaviorSubject<boolean>;
 
-  constructor(@Inject('Storage') private readonly localStorage: Storage,
+  constructor(
+    @Inject('Storage') private readonly localStorage: Storage,
     @Inject('BASE_URL') private readonly BASE_URL: string,
-    private readonly httpClient: HttpClient) {
-    //localStorage.clear();
+    private readonly httpClient: HttpClient
+  ) {
     const currentUserInfo: User = JSON.parse(this.localStorage.getItem(this.USER));
     this.isAuthenticated$ = new BehaviorSubject(Boolean(currentUserInfo));
     this.userInfo$ = Boolean(currentUserInfo) ? new BehaviorSubject(currentUserInfo) : new Subject();
