@@ -14,6 +14,10 @@ import { DurationInputComponentComponent } from './duration-input-component/dura
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { AppComponentsRoutingModule } from './app-components-routing.module';
 import { BlockingOverlayComponent } from './blocking-overlay/blocking-overlay.component';
+import { StoreModule } from '@ngrx/store';
+import * as fromCourses from '@app/store/reducers/courses.reducer';
+import { EffectsModule } from '@ngrx/effects';
+import { CoursesEffects } from '@app/store/effects/courses.effects';
 
 @NgModule({
   declarations: [
@@ -34,6 +38,8 @@ import { BlockingOverlayComponent } from './blocking-overlay/blocking-overlay.co
     AppServicesModule,
     FormsModule,
     AppComponentsRoutingModule,
+    StoreModule.forFeature(fromCourses.coursesFeatureKey, fromCourses.reducer),
+    EffectsModule.forFeature([CoursesEffects]),
   ],
   exports: [
     BreadcrumbsNavbarComponent,

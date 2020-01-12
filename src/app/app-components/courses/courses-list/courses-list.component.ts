@@ -1,9 +1,12 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Course } from '@app/app-models';
 import { OrderByPipe, FilterByPipe } from '@app/app-pipes';
-import { CoursesService } from '@app/app-services';
-import { Observable, zip } from 'rxjs';
+import { Observable, zip, of } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
+import { Store } from '@ngrx/store';
+import { AppState } from '@app/store';
+import { getCoursesStatus } from '@app/store/selectors/courses.selectors';
+import * as CoursesActions from '@app/store/actions/courses.actions';
 
 /** Displays all the existing courses. */
 @Component({
@@ -15,48 +18,40 @@ import { map, switchMap } from 'rxjs/operators';
 export class CoursesListComponent implements OnInit {
   @Input() set filterTitle(filterTitle: string) {
     if (filterTitle) {
-      this.courses$ = this.coursesService.list({ textFragment: filterTitle });
+      this.store.dispatch(CoursesActions.listCourses({ textFragment: filterTitle }));
     }
   }
-  courses$: Observable<Course[]>;
+  courses$: Observable<Course[]> = this.store.select(getCoursesStatus);
   private readonly pageSize = 5;
   private pageIndex = 0;
 
-  constructor(private readonly coursesService: CoursesService) {
-    this.courses$ = this.loadByPage(this.previousPage(), this.nextPage())
-      .pipe(map((courses: Course[]) => new OrderByPipe().transform(courses)));
+  constructor(
+    private readonly store: Store<AppState>,
+  ) { }
+
+  ngOnInit() {
+    this.loadByPage(this.getPage(), this.nextPage());
   }
 
-  ngOnInit() { }
-
-  onDeleteItem(idCourse: string) {
+  onDeleteItem(courseId: string) {
     if (confirm('Do you really want to delete this course?')) {
-      // ToDo: Implement deleteById in BE.
-      this.courses$ =
-        this.coursesService.delete(idCourse).pipe(switchMap(() => {
-          this.pageIndex = 0;
-          return this.loadByPage(this.previousPage(), this.nextPage())
-            .pipe(map((courses: Course[]) => new OrderByPipe().transform(courses)));
-        }));
+      this.store.dispatch(CoursesActions.deleteCourse({ courseId }));
     }
   }
 
   onLoadMore() {
-    const result$ = this.loadByPage(this.previousPage(), this.nextPage());
-    this.courses$ = zip(this.courses$, result$)
-      .pipe(map(([a, b]) => [...a, ...b]))
-      .pipe(map((courses: Course[]) => new OrderByPipe().transform(courses)));
+    this.loadByPage(this.getPage(), this.nextPage());
   }
 
-  private loadByPage(start: string, count: string): Observable<Course[]> {
-    return this.coursesService.list({ start, count });
+  private loadByPage(start: string, count: string) {
+    this.store.dispatch(CoursesActions.listCourses({ start, count }));
   }
 
-  private previousPage(): string {
-    return String(this.pageIndex * this.pageSize);
+  private getPage(): string {
+    return String(this.pageSize * this.pageIndex++);
   }
 
   private nextPage(): string {
-    return String(++this.pageIndex * this.pageSize - 1);
+    return String(this.pageSize);
   }
 }

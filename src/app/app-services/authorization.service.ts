@@ -2,7 +2,11 @@ import { Injectable, Inject } from '@angular/core';
 import { User } from '@app/app-models';
 import { HttpClient } from '@angular/common/http';
 import { switchMap, tap } from 'rxjs/operators';
-import { Observable, Subject, BehaviorSubject } from 'rxjs';
+import { Observable } from 'rxjs';
+import { Store } from '@ngrx/store';
+import * as AuthorizationActions from '@app/store/actions/authorization.actions';
+import { getAccessStatus, getUserStatus } from '@app/store/selectors/authorization.selectors';
+import { AppState } from '@app/store';
 
 @Injectable({
   providedIn: 'root'
@@ -12,17 +16,20 @@ export class AuthorizationService {
   readonly USER = 'CURRENT_USER';
   readonly TOKEN = 'TOKEN';
   private token?: string;
-  userInfo$: Subject<User> | BehaviorSubject<User>;
-  isAuthenticated$: BehaviorSubject<boolean>;
+  userInfo$: Observable<User> = this.store.select(getUserStatus);
+  isAuthenticated$: Observable<boolean> = this.store.select(getAccessStatus);
 
   constructor(
     @Inject('Storage') private readonly localStorage: Storage,
     @Inject('BASE_URL') private readonly BASE_URL: string,
-    private readonly httpClient: HttpClient
+    private readonly httpClient: HttpClient,
+    private store: Store<AppState>
   ) {
     const currentUserInfo: User = JSON.parse(this.localStorage.getItem(this.USER));
-    this.isAuthenticated$ = new BehaviorSubject(Boolean(currentUserInfo));
-    this.userInfo$ = Boolean(currentUserInfo) ? new BehaviorSubject(currentUserInfo) : new Subject();
+    if (Boolean(currentUserInfo)) {
+      this.store.dispatch(AuthorizationActions.updateUser({ userInfo: currentUserInfo }));
+      this.store.dispatch(AuthorizationActions.allowAccess());
+    }
   }
 
   login(login?: string, password?: string) {
@@ -35,8 +42,8 @@ export class AuthorizationService {
 
       result$.subscribe((userInfo: User) => {
         this.localStorage.setItem(this.USER, JSON.stringify(userInfo));
-        this.userInfo$.next(userInfo);
-        this.isAuthenticated$.next(true);
+        this.store.dispatch(AuthorizationActions.updateUser({ userInfo }));
+        this.store.dispatch(AuthorizationActions.allowAccess());
       }, error => {
         alert('Incorrect email and/or password.');
         console.error(error);
@@ -48,8 +55,8 @@ export class AuthorizationService {
     const currentUser = this.localStorage.getItem(this.USER);
     if (currentUser) {
       this.localStorage.removeItem(this.USER);
-      this.userInfo$.next(undefined);
-      this.isAuthenticated$.next(false);
+      this.store.dispatch(AuthorizationActions.updateUser({ userInfo: null }));
+      this.store.dispatch(AuthorizationActions.removeAccess());
     }
   }
 

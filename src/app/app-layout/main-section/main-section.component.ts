@@ -1,6 +1,4 @@
 import { Component, AfterViewInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
-import { AuthorizationService, CoursesService } from '@app/app-services';
-import { Course } from '@app/app-models';
 import { Router } from '@angular/router';
 import { fromEvent, Subject } from 'rxjs';
 import { debounceTime, filter, map, distinctUntilChanged, takeUntil } from 'rxjs/operators';
@@ -19,8 +17,7 @@ export class MainSectionComponent implements AfterViewInit, OnDestroy {
   private readonly onDestroy$ = new Subject();
   @ViewChild('searchInput', { static: false }) input: ElementRef;
 
-  constructor(authService: AuthorizationService, private readonly courseService: CoursesService, private readonly router: Router) {
-  }
+  constructor(private readonly router: Router) { }
 
   ngAfterViewInit() {
     fromEvent(this.input.nativeElement, 'keyup').pipe(

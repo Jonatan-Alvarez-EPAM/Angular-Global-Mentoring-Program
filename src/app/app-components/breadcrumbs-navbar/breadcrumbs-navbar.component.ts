@@ -1,7 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { CoursesService } from '@app/app-services';
 import { Course } from '@app/app-models';
+import { Store } from '@ngrx/store';
+import { AppState } from '@app/store';
+import * as CoursesActions from '@app/store/actions/courses.actions';
+import { getCurrentCourseStatus } from '@app/store/selectors/courses.selectors';
+import { map, filter } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 /** Displays the current section the user is in. */
 @Component({
@@ -12,19 +17,20 @@ import { Course } from '@app/app-models';
 export class BreadcrumbsNavbarComponent implements OnInit {
 
   courseId?: string;
-  courseName?: string;
+  courseName$: Observable<string> = this.store.select(getCurrentCourseStatus)
+    .pipe(
+      filter(Boolean),
+      map((course: Course) => course.name));
+
   constructor(
     private readonly route: ActivatedRoute,
-    private readonly coursesService: CoursesService,
+    private readonly store: Store<AppState>,
   ) { }
 
   ngOnInit() {
     this.courseId = this.route.snapshot.paramMap.get('id');
     if (this.courseId) {
-      this.coursesService.get(this.courseId)
-        .subscribe((response: Course) => {
-          this.courseName = response[0].name;
-        });
+      this.store.dispatch(CoursesActions.getCourse({ courseId: this.courseId }));
     }
   }
 }
