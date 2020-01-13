@@ -3,7 +3,6 @@
 :host { 
     @include row;
     justify-content: flex-start;
-    width: fit-content;
     
     &.ng-pristine {
         border: none;
@@ -12,9 +11,12 @@
 
 input {
     width: 100%;
-    height: 48px;
     border-radius: 3px;
     border: solid 1px #d9dbe3;
     background-color: var(--white);
     text-indent: 15px;
+  }
+
+  .mat-form-field {
+      width: 100%;
   }

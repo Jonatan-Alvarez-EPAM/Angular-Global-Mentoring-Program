@@ -1,7 +1,8 @@
-import { Component, AfterViewInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
+import { Component, AfterViewInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
-import { fromEvent, Subject } from 'rxjs';
-import { debounceTime, filter, map, distinctUntilChanged, takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
+import { debounceTime, filter, distinctUntilChanged, takeUntil } from 'rxjs/operators';
+import { FormControl, Validators } from '@angular/forms';
 
 /** Main display area. */
 @Component({
@@ -11,20 +12,16 @@ import { debounceTime, filter, map, distinctUntilChanged, takeUntil } from 'rxjs
 })
 export class MainSectionComponent implements AfterViewInit, OnDestroy {
   titleToSearch: string;
-  isUserAuthenticated = false;
-  searchTerm: string;
-  showAddCoursePage = false;
   private readonly onDestroy$ = new Subject();
-  @ViewChild('searchInput', { static: false }) input: ElementRef;
+  readonly searchInputControl = new FormControl({ value: null, disabled: false }, Validators.required);
 
   constructor(private readonly router: Router) { }
 
   ngAfterViewInit() {
-    fromEvent(this.input.nativeElement, 'keyup').pipe(
+    this.searchInputControl.valueChanges.pipe(
       takeUntil(this.onDestroy$),
       debounceTime(300),
       distinctUntilChanged(),
-      map((event: KeyboardEvent) => (event.target as HTMLInputElement).value),
       filter((text: string) => text && text.length > 2),
     ).subscribe(input => this.titleToSearch = input);
   }

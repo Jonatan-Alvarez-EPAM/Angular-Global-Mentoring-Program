@@ -1,22 +1,72 @@
 <div class="add-course">
     <app-breadcrumbs-navbar></app-breadcrumbs-navbar>
-    <div class="add-course-container">
-        <div class="container">
-            <span>Title:</span>
-            <input [(ngModel)]="name" type="text" placeholder="Add title">
-            <span>Description:</span>
-            <textarea [(ngModel)]="description" placeholder="Add description"></textarea>
-            <span>Date:</span>
-            <app-date-input-component (dateChange)="onDateChange($event)" [date]="date"></app-date-input-component>
-            <span>Duration:</span>
-            <app-duration-input-component (durationChange)="onDurationChange($event)" [minutes]="length">
-            </app-duration-input-component>
-            <span>Authors:</span>
-            <input type="text" placeholder="Oops! this is temporarily disabled..." disabled>
-            <div class="actions">
-                <button (click)="onSave()" class="save-button" [disabled]="!enableSaveButton()">Save</button>
-                <button (click)="onCancel()" class="cancel-button">Cancel</button>
+    <form [formGroup]="formGroup">
+        <div class="add-course-container">
+            <div class="container">
+                <div class="row input-label" [class.error]="computeControlValidity(nameControl)">
+                    <span>Title:</span>
+                    <ng-container *ngIf="computeControlValidity(nameControl)">
+                        <span *ngIf="nameControl.hasError('required')">*required</span>
+                        <span *ngIf="nameControl.errors?.maxlength as error">
+                            *max length is {{error.requiredLength}} characters
+                        </span>
+                    </ng-container>
+                </div>
+                <input formControlName="name" type="text" placeholder="Add title">
+
+                <div class=" row input-label" [class.error]="computeControlValidity(descriptionControl)">
+                    <span>Description:</span>
+                    <ng-container *ngIf="computeControlValidity(descriptionControl)">
+                        <span *ngIf="descriptionControl.hasError('required')">*required</span>
+                        <span *ngIf="descriptionControl.errors?.maxlength as error">
+                            *max length is {{error.requiredLength}} characters
+                        </span>
+                    </ng-container>
+                </div>
+                <textarea formControlName="description" placeholder="Add description"></textarea>
+
+                <div class="row" [class.error]="computeControlValidity(dateControl)">
+                    <span>Date:</span>
+                    <ng-container *ngIf="computeControlValidity(dateControl)">
+                        <span *ngIf="dateControl.hasError('required')" class="left-spacing">*required</span>
+                        <span *ngIf="!dateControl.hasError('required') && dateControl.hasError('invalidDate')"
+                            class="left-spacing">
+                            *date must follow <i>dd/mm/yyyy</i> format.
+                        </span>
+                    </ng-container>
+                </div>
+                <app-date-input-component formControlName="date"></app-date-input-component>
+
+                <div class="row" [class.error]="computeControlValidity(lengthControl)">
+                    <span>Duration:</span>
+                    <ng-container *ngIf="computeControlValidity(lengthControl)">
+                        <span *ngIf="lengthControl.hasError('required')" class="left-spacing">*required</span>
+                        <span *ngIf="!lengthControl.hasError('required') && lengthControl.hasError('invalidLength')"
+                            class="left-spacing">
+                            *length must be an integer number greater than zero.
+                        </span>
+                    </ng-container>
+                </div>
+                <app-duration-input-component formControlName="length"></app-duration-input-component>
+
+                <div class="row input-label" [class.error]="computeControlValidity(authorsControl)">
+                    <span>Authors:</span>
+                    <ng-container *ngIf="computeControlValidity(authorsControl)">
+                        <span *ngIf="authorsControl.hasError('required')" class="left-spacing">*required</span>
+                        <span
+                            *ngIf="!authorsControl.hasError('required') && authorsControl.errors.invalidAtLeastItems as error"
+                            class="left-spacing">
+                            *course should have at least {{error.requiredItems}} author(s).
+                        </span>
+                    </ng-container>
+                </div>
+                <app-authors-input-component [options]="authors$ | async" [formControl]="authorsControl">
+                </app-authors-input-component>
+                <div class="actions">
+                    <button (click)="onSave()" class="save-button" [disabled]="formGroup.invalid">Save</button>
+                    <button (click)="onCancel()" class="cancel-button">Cancel</button>
+                </div>
             </div>
         </div>
-    </div>
+    </form>
 </div>

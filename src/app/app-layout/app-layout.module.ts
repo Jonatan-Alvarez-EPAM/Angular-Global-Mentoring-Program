@@ -4,7 +4,7 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { MainSectionComponent } from './main-section/main-section.component';
 import { AppComponentsModule } from '../app-components/app-components.module';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppServicesModule } from '../app-services/app-services.module';
 
 @NgModule({
@@ -13,6 +13,7 @@ import { AppServicesModule } from '../app-services/app-services.module';
     CommonModule,
     AppComponentsModule,
     FormsModule,
+    ReactiveFormsModule,
     AppServicesModule,
   ],
   exports: [HeaderComponent, FooterComponent, MainSectionComponent],

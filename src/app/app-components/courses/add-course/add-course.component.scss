@@ -54,6 +54,12 @@ button {
       resize: vertical;
   }
 
-  app-date-input-component {
-      max-width: 160px;
+  .input-label {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .left-spacing {
+    margin-left: 50px;
   }

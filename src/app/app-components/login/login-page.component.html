@@ -1,13 +1,25 @@
 <div class="login-container">
-    <div class="container">
-        <span class="login-text">Login</span>
-        <span>E-mail:</span>
-        <input [(ngModel)]="email" type="email" placeholder="example@mail.com">
-        <span>Password:</span>
-        <input [(ngModel)]="password" type="password" placeholder="*********">
-        <div class="actions">
-            <a href="/">Forgot password?</a>
-            <button (click)="onLogin()" class="login-button">Login</button>
+    <form [formGroup]="formGroup">
+        <div class="container">
+            <span class="login-text">Login</span>
+            <div class="row input-label" [class.error]="this.computeControlValidity(emailControl)">
+                <span>E-mail:</span>
+                <span *ngIf="this.computeControlValidity(emailControl) && emailControl.hasError('required')">
+                    *required
+                </span>
+            </div>
+            <input formControlName="email" type="email" placeholder="example@mail.com" name="email">
+            <div class="row input-label" [class.error]="this.computeControlValidity(passwordControl)">
+                <span>Password:</span>
+                <span *ngIf="this.computeControlValidity(passwordControl) && passwordControl.hasError('required')">
+                    *required
+                </span>
+            </div>
+            <input formControlName="password" type="password" placeholder="*********" name="password">
+            <div class="actions">
+                <a href="/">Forgot password?</a>
+                <button (click)="onLogin()" class="login-button" [disabled]="formGroup.invalid">Login</button>
+            </div>
         </div>
-    </div>
+    </form>
 </div>
