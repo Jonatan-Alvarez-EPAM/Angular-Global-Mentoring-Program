@@ -17,7 +17,7 @@ export class LoginPageComponent {
     constructor(private readonly authService: AuthorizationService, private readonly router: Router) { }
 
     onLogin() {
-        this.authService.login();
+        this.authService.login(this.email, this.password);
         this.loggedIn.emit();
         this.router.navigate(['/courses']);
     }

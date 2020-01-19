@@ -23,7 +23,6 @@ export class HeaderComponent implements OnInit {
   onLogIn() {
     this.authService.login();
     this.isUserAuthenticated = true;
-    console.log('[FAKE] logged in successfully...');
   }
 
   onLogOff() {

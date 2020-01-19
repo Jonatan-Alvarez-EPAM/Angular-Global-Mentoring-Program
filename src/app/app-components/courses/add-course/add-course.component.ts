@@ -2,6 +2,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Course } from '@app/app-models';
 import { Router, ActivatedRoute } from '@angular/router';
 import { CoursesService } from '@app/app-services';
+import { map } from 'rxjs/operators';
 
 enum SavingModes { CREATE, UPDATE }
 
@@ -17,23 +18,30 @@ export class AddCourseComponent implements OnInit {
 
   private savingMode = SavingModes.CREATE;
   id?: string;
-  title: string;
+  name: string;
   description: string;
   date: Date;
-  duration: number;
+  length: number;
   courseInfo: Course;
 
-  constructor(private readonly router: Router, private readonly route: ActivatedRoute, private readonly coursesService: CoursesService) { }
+  constructor(
+    private readonly router: Router,
+    private readonly route: ActivatedRoute,
+    private readonly coursesService: CoursesService,
+  ) { }
 
   ngOnInit() {
     this.id = this.route.snapshot.paramMap.get('id');
     if (this.id) {
       this.savingMode = SavingModes.UPDATE;
-      const courseInfo = this.coursesService.get(this.id);
-      this.title = courseInfo.title;
-      this.duration = courseInfo.duration;
-      this.description = courseInfo.description;
-      this.date = courseInfo.creationDate;
+      this.coursesService.get(this.id)
+        .pipe(map(courses => courses[0]))
+        .subscribe((response: Course) => {
+          this.name = response.name;
+          this.length = response.length;
+          this.description = response.description;
+          this.date = response.date;
+        });
     }
   }
 
@@ -42,18 +50,24 @@ export class AddCourseComponent implements OnInit {
     const timestamp = today.getTime().toString();
     this.courseInfo = {
       id: timestamp,
-      title: this.title,
-      creationDate: new Date(),
-      duration: this.duration,
+      name: this.name,
+      date: new Date(),
+      length: this.length,
       description: this.description,
-      topRated: false,
+      isTopRated: false,
     };
     this.save.emit(this.courseInfo);
 
     if (this.savingMode === SavingModes.CREATE) {
-      this.coursesService.create(this.courseInfo);
+      this.coursesService.create(this.courseInfo)
+        .subscribe({
+          error: (error) => { console.error('Something went wrong', error); }
+        });
     } else {
-      this.coursesService.update(this.id, this.courseInfo);
+      this.coursesService.update(this.courseInfo)
+        .subscribe({
+          error: (error) => { console.error('Something went wrong', error); }
+        });
     }
     this.router.navigate(['/courses']);
   }
@@ -68,11 +82,11 @@ export class AddCourseComponent implements OnInit {
   }
 
   onDurationChange(duration: number) {
-    this.duration = duration;
+    this.length = duration;
   }
 
   enableSaveButton(): boolean {
-    const saveButtonEnabled = !!this.title && !!this.description && !!this.date && !!this.duration;
+    const saveButtonEnabled = !!this.name && !!this.description && !!this.date && !!this.length;
     return saveButtonEnabled;
   }
 }
