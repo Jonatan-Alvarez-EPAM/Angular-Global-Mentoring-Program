@@ -2,10 +2,7 @@
     <app-breadcrumbs-navbar></app-breadcrumbs-navbar>
     <div class="container">
         <div>
-            <input [(ngModel)]="searchTerm" type="text" placeholder="Text to search">
-            <button [disabled]="!searchTerm" class="search-button" (click)="onSearch(searchTerm)">
-                Search
-            </button>
+            <input [(ngModel)]="searchTerm" type="text" placeholder="Text to search" #searchInput>
         </div>
         <div class="align-right">
             <button class="add-course-button" (click)="onAddCourse()">+ Add course</button>

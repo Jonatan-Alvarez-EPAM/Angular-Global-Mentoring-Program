@@ -13,6 +13,7 @@ import { DateInputComponentComponent } from './date-input-component/date-input-c
 import { DurationInputComponentComponent } from './duration-input-component/duration-input-component.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { AppComponentsRoutingModule } from './app-components-routing.module';
+import { BlockingOverlayComponent } from './blocking-overlay/blocking-overlay.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { AppComponentsRoutingModule } from './app-components-routing.module';
     DateInputComponentComponent,
     DurationInputComponentComponent,
     PageNotFoundComponent,
+    BlockingOverlayComponent,
   ],
   imports: [
     CommonModule,
@@ -42,6 +44,7 @@ import { AppComponentsRoutingModule } from './app-components-routing.module';
     DateInputComponentComponent,
     DurationInputComponentComponent,
     PageNotFoundComponent,
+    BlockingOverlayComponent,
   ],
 })
 export class AppComponentsModule { }

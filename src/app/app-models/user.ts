@@ -5,6 +5,8 @@ export interface User {
     name: {
         firstName: string;
         lastName: string;
+        first: string; // Here for backend compatibility
+        last: string; // Here for backend compatibility
     };
     login: string;
     password: string;

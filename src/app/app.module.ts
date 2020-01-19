@@ -6,7 +6,8 @@ import { AppComponent } from './app.component';
 import { AppLayoutModule } from './app-layout/app-layout.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponentsRoutingModule } from './app-components/app-components-routing.module';
-import { AuthInterceptor } from '@app//app-services/AuthInterceptor';
+import { AuthInterceptor } from '@app/app-services/AuthInterceptor';
+import { AppComponentsModule } from '@app/app-components/app-components.module';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { AuthInterceptor } from '@app//app-services/AuthInterceptor';
     AppComponentsRoutingModule,
     AppRoutingModule,
     HttpClientModule,
+    AppComponentsModule,
   ],
   providers: [
     { provide: 'Storage', useValue: localStorage },
