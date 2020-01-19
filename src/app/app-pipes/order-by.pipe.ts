@@ -9,6 +9,6 @@ export class OrderByPipe implements PipeTransform {
   transform(courses: Course[], ...args: string[]): Course[] {
     return courses.sort(
       (courseA, courseB) =>
-        courseA.creationDate.getTime() - courseB.creationDate.getTime());
+        new Date(courseA.date).getTime() - new Date(courseB.date).getTime());
   }
 }

@@ -23,7 +23,7 @@ export class CourseStatusDirective implements OnInit {
 
     const todayTimestamp = today.getTime();
     const prev14daysTimestamp = prev14days.getTime();
-    const courseCreationTimestamp = this.courseCreationDate.getTime();
+    const courseCreationTimestamp = new Date(this.courseCreationDate).getTime();
     const isFresh = courseCreationTimestamp < todayTimestamp && courseCreationTimestamp >= prev14daysTimestamp;
     const toBeReleased = courseCreationTimestamp > todayTimestamp;
 

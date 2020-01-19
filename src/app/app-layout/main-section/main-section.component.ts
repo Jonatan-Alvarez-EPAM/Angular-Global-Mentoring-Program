@@ -22,7 +22,6 @@ export class MainSectionComponent implements OnInit {
   }
 
   onSearch(event: string) {
-    console.log('Searching for:', event);
     this.titleToSearch = `${event}`;
   }
 

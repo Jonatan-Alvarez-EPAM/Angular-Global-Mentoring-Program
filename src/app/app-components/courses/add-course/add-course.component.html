@@ -3,13 +3,13 @@
     <div class="add-course-container">
         <div class="container">
             <span>Title:</span>
-            <input [(ngModel)]="title" type="text" placeholder="Add title">
+            <input [(ngModel)]="name" type="text" placeholder="Add title">
             <span>Description:</span>
             <textarea [(ngModel)]="description" placeholder="Add description"></textarea>
             <span>Date:</span>
             <app-date-input-component (dateChange)="onDateChange($event)" [date]="date"></app-date-input-component>
             <span>Duration:</span>
-            <app-duration-input-component (durationChange)="onDurationChange($event)" [minutes]="duration">
+            <app-duration-input-component (durationChange)="onDurationChange($event)" [minutes]="length">
             </app-duration-input-component>
             <span>Authors:</span>
             <input type="text" placeholder="Oops! this is temporarily disabled..." disabled>

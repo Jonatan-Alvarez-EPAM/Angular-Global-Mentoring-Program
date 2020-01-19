@@ -1,6 +1,11 @@
 /** App-wide model to handle user info. */
 export interface User {
     id: string;
-    firstName: string;
-    lastName: string;
+    token: string;
+    name: {
+        firstName: string;
+        lastName: string;
+    };
+    login: string;
+    password: string;
 }

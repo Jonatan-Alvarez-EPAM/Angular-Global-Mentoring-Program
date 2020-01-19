@@ -2,6 +2,8 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Course } from '@app/app-models';
 import { OrderByPipe, FilterByPipe } from '@app/app-pipes';
 import { CoursesService } from '@app/app-services';
+import { Observable, zip } from 'rxjs';
+import { map, switchMap } from 'rxjs/operators';
 
 /** Displays all the existing courses. */
 @Component({
@@ -12,30 +14,49 @@ import { CoursesService } from '@app/app-services';
 })
 export class CoursesListComponent implements OnInit {
   @Input() set filterTitle(filterTitle: string) {
-    this.courses = new FilterByPipe().transform(this.courses, filterTitle);
+    if (filterTitle) {
+      this.courses$ = this.coursesService.list({ textFragment: filterTitle });
+    }
   }
-  courses: Course[] = [];
+  courses$: Observable<Course[]>;
+  private readonly pageSize = 5;
+  private pageIndex = 0;
 
   constructor(private readonly coursesService: CoursesService) {
+    this.courses$ = this.loadByPage(this.previousPage(), this.nextPage())
+      .pipe(map((courses: Course[]) => new OrderByPipe().transform(courses)));
   }
 
-  ngOnInit() {
-    this.refresh();
-  }
+  ngOnInit() { }
 
   onDeleteItem(idCourse: string) {
     if (confirm('Do you really want to delete this course?')) {
-      this.coursesService.delete(idCourse);
-      this.refresh();
+      // ToDo: Implement deleteById in BE.
+      this.courses$ =
+        this.coursesService.delete(idCourse).pipe(switchMap(() => {
+          this.pageIndex = 0;
+          return this.loadByPage(this.previousPage(), this.nextPage())
+            .pipe(map((courses: Course[]) => new OrderByPipe().transform(courses)));
+        }));
     }
   }
 
   onLoadMore() {
-    console.log('[FAKE] Load more...');
+    const result$ = this.loadByPage(this.previousPage(), this.nextPage());
+    this.courses$ = zip(this.courses$, result$)
+      .pipe(map(([a, b]) => [...a, ...b]))
+      .pipe(map((courses: Course[]) => new OrderByPipe().transform(courses)));
   }
 
-  private refresh() {
-    const courses = this.coursesService.list();
-    this.courses = new OrderByPipe().transform(courses);
+  private loadByPage(start: string, count: string): Observable<Course[]> {
+    return this.coursesService.list({ start, count });
+  }
+
+  private previousPage(): string {
+    return String(this.pageIndex * this.pageSize);
+  }
+
+  private nextPage(): string {
+    return String(++this.pageIndex * this.pageSize - 1);
   }
 }
