@@ -17,14 +17,7 @@ export class CoursesService {
   }
 
   create(courseInfo: Course): Observable<Course> {
-    return this.httpClient.post<Course>(`${this.BASE_URL}/courses`, {
-      id: courseInfo.id,
-      name: courseInfo.name,
-      date: courseInfo.date,
-      length: courseInfo.length,
-      description: courseInfo.description,
-      isTopRated: courseInfo.isTopRated,
-    });
+    return this.httpClient.post<Course>(`${this.BASE_URL}/courses`, courseInfo);
   }
 
   get(idCourse: string): Observable<Course> {
@@ -33,14 +26,7 @@ export class CoursesService {
 
   update(courseInfo: Course): Observable<Course> {
     // ToDo: Implement update course in BE
-    return this.httpClient.put<Course>(`${this.BASE_URL}/courses`, {
-      id: courseInfo.id,
-      name: courseInfo.name,
-      date: courseInfo.date,
-      length: courseInfo.length,
-      description: courseInfo.description,
-      isTopRated: courseInfo.isTopRated,
-    });
+    return this.httpClient.put<Course>(`${this.BASE_URL}/courses`, courseInfo);
   }
 
   delete(idCourse: string): Observable<Course> {
