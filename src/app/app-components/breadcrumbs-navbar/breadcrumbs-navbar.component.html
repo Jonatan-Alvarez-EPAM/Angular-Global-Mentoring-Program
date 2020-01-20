@@ -1,4 +1,4 @@
 <div class="rectangle">
-    <span><a routerLink="/courses">Courses</a></span>
+    <span><a routerLink="/courses">{{'breadcrumbs_navbar.courses' | translate}}</a></span>
     <span *ngIf="courseId" class="course-name">{{(courseName$|async)}}</span>
 </div>

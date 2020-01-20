@@ -77,3 +77,15 @@
     letter-spacing: normal;
     color: var(--white);
   }
+
+  .mat-select {
+    width: 150px;
+    background-color: var(--white);
+    margin-left: 10px;
+  }
+
+  .block {
+    @include row;
+    justify-content: center;
+    align-items: center;
+  }

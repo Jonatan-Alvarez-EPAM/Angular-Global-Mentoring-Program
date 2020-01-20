@@ -1,2 +1,2 @@
-<input placeholder="minutes" [(ngModel)]="minutes" [disabled]="disabled">
+<input [placeholder]="'duration_input_component.minutes' | translate" [(ngModel)]="minutes" [disabled]="disabled">
 <span *ngIf="minutes && !isValidLength">{{minutes | duration}}</span>

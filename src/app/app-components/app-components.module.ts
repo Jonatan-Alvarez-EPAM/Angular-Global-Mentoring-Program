@@ -25,6 +25,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatIconModule } from '@angular/material/icon';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatFormFieldModule, MatInputModule } from '@angular/material';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   declarations: [
@@ -53,6 +54,7 @@ import { MatFormFieldModule, MatInputModule } from '@angular/material';
     MatIconModule,
     MatFormFieldModule,
     MatInputModule,
+    TranslateModule,
     AppComponentsRoutingModule,
     StoreModule.forFeature(fromCourses.coursesFeatureKey, fromCourses.reducer),
     EffectsModule.forFeature([CoursesEffects]),

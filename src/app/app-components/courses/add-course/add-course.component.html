@@ -4,67 +4,71 @@
         <div class="add-course-container">
             <div class="container">
                 <div class="row input-label" [class.error]="computeControlValidity(nameControl)">
-                    <span>Title:</span>
+                    <span>{{'add_course_component.title' | translate}}:</span>
                     <ng-container *ngIf="computeControlValidity(nameControl)">
-                        <span *ngIf="nameControl.hasError('required')">*required</span>
+                        <span *ngIf="nameControl.hasError('required')">*{{'common.required' | translate}}</span>
                         <span *ngIf="nameControl.errors?.maxlength as error">
-                            *max length is {{error.requiredLength}} characters
+                            *{{'add_course_component.max_length_error' | translate:{'requiredLength': error.requiredLength} }}
                         </span>
                     </ng-container>
                 </div>
-                <input formControlName="name" type="text" placeholder="Add title">
+                <input formControlName="name" type="text" [placeholder]="'add_course_component.add_title' | translate">
 
                 <div class=" row input-label" [class.error]="computeControlValidity(descriptionControl)">
-                    <span>Description:</span>
+                    <span>{{'add_course_component.description' | translate}}:</span>
                     <ng-container *ngIf="computeControlValidity(descriptionControl)">
-                        <span *ngIf="descriptionControl.hasError('required')">*required</span>
+                        <span *ngIf="descriptionControl.hasError('required')">*{{'common.required' | translate}}</span>
                         <span *ngIf="descriptionControl.errors?.maxlength as error">
-                            *max length is {{error.requiredLength}} characters
+                            *{{'add_course_component.max_length_error' | translate:{'requiredLength': error.requiredLength} }}
                         </span>
                     </ng-container>
                 </div>
-                <textarea formControlName="description" placeholder="Add description"></textarea>
+                <textarea formControlName="description"
+                    [placeholder]="'add_course_component.add_description' | translate"></textarea>
 
                 <div class="row" [class.error]="computeControlValidity(dateControl)">
-                    <span>Date:</span>
+                    <span>{{'add_course_component.date' | translate}}:</span>
                     <ng-container *ngIf="computeControlValidity(dateControl)">
-                        <span *ngIf="dateControl.hasError('required')" class="left-spacing">*required</span>
+                        <span *ngIf="dateControl.hasError('required')"
+                            class="left-spacing">*{{'common.required' | translate}}</span>
                         <span *ngIf="!dateControl.hasError('required') && dateControl.hasError('invalidDate')"
-                            class="left-spacing">
-                            *date must follow <i>dd/mm/yyyy</i> format.
+                            class="left-spacing" [innerHTML]="'add_course_component.date_format_error' | translate">
                         </span>
                     </ng-container>
                 </div>
                 <app-date-input-component formControlName="date"></app-date-input-component>
 
                 <div class="row" [class.error]="computeControlValidity(lengthControl)">
-                    <span>Duration:</span>
+                    <span>{{'add_course_component.duration' | translate}}:</span>
                     <ng-container *ngIf="computeControlValidity(lengthControl)">
-                        <span *ngIf="lengthControl.hasError('required')" class="left-spacing">*required</span>
+                        <span *ngIf="lengthControl.hasError('required')"
+                            class="left-spacing">*{{'common.required' | translate}}</span>
                         <span *ngIf="!lengthControl.hasError('required') && lengthControl.hasError('invalidLength')"
                             class="left-spacing">
-                            *length must be an integer number greater than zero.
+                            *{{'add_course_component.duration_error' | translate }}
                         </span>
                     </ng-container>
                 </div>
                 <app-duration-input-component formControlName="length"></app-duration-input-component>
 
                 <div class="row input-label" [class.error]="computeControlValidity(authorsControl)">
-                    <span>Authors:</span>
+                    <span>{{'add_course_component.authors' | translate}}:</span>
                     <ng-container *ngIf="computeControlValidity(authorsControl)">
-                        <span *ngIf="authorsControl.hasError('required')" class="left-spacing">*required</span>
+                        <span *ngIf="authorsControl.hasError('required')"
+                            class="left-spacing">*{{'common.required' | translate}}</span>
                         <span
                             *ngIf="!authorsControl.hasError('required') && authorsControl.errors.invalidAtLeastItems as error"
                             class="left-spacing">
-                            *course should have at least {{error.requiredItems}} author(s).
+                            *{{'add_course_component.authors_error' | translate:{'requiredLength': error.requiredItems} }}
                         </span>
                     </ng-container>
                 </div>
                 <app-authors-input-component [options]="authors$ | async" [formControl]="authorsControl">
                 </app-authors-input-component>
                 <div class="actions">
-                    <button (click)="onSave()" class="save-button" [disabled]="formGroup.invalid">Save</button>
-                    <button (click)="onCancel()" class="cancel-button">Cancel</button>
+                    <button (click)="onSave()" class="save-button"
+                        [disabled]="formGroup.invalid">{{'common.save' | translate}}</button>
+                    <button (click)="onCancel()" class="cancel-button">{{'common.cancel' | translate}}</button>
                 </div>
             </div>
         </div>

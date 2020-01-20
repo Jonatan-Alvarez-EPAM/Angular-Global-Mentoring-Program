@@ -5,10 +5,10 @@
     </div>
 
     <div class="rectangle" (click)="onLoadMore()">
-        <span>LOAD MORE</span>
+        <span>{{'courses_list_component.load_more' | translate}}</span>
     </div>
 </ng-container>
 
 <div *ngIf="!(courses$|async)" class="rectangle">
-    NO DATA. FEEL FREE TO ADD NEW COURSE
+    {{'courses_list_component.no_data' | translate}}
 </div>

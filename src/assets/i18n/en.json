@@ -1,0 +1,60 @@
+{
+    "app": {
+        "lang": {
+            "es": "Spanish",
+            "en": "English"
+        }
+    },
+    "common": {
+        "cancel": "cancel",
+        "required": "required",
+        "save": "save",
+        "edit": "edit",
+        "delete": "delete",
+        "choose_language": "Choose language"
+    },
+    "header": {
+        "welcome": "Welcome",
+        "user_login": "user login",
+        "log_off": "log off"
+    },
+    "footer": {
+        "copyright": "Copyright"
+    },
+    "main_section": {
+        "text_to_search": "Text to search",
+        "add_course": "Add course"
+    },
+    "breadcrumbs_navbar": {
+        "courses": "Courses"
+    },
+    "login_page": {
+        "login": "Login",
+        "email": "E-mail",
+        "password": "Password",
+        "forgot_password": "Forgot password?"
+    },
+    "page_not_found": {
+        "page_not_found": "Page not found"
+    },
+    "add_course_component": {
+        "title": "Title",
+        "max_length_error": "max length is {{requiredLength}} characters",
+        "add_title": "Add title",
+        "description": "Description",
+        "add_description": "Add description",
+        "date": "Date",
+        "date_format_error": "date must follow <i>dd/mm/yyyy</i> format.",
+        "duration": "Duration",
+        "duration_error": "length must be an integer number greater than zero.",
+        "authors": "Authors",
+        "authors_error": "course should have at least {{requiredItems}} author(s)."
+    },
+    "courses_list_component": {
+        "load_more": "LOAD MORE",
+        "no_data": "NO DATA. FEEL FREE TO ADD NEW COURSE"
+    },
+    "duration_input_component": {
+        "minutes": "minutes"
+    }
+}
