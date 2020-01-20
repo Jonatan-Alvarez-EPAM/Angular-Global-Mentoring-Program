@@ -1,24 +1,25 @@
 <div class="login-container">
     <form [formGroup]="formGroup">
         <div class="container">
-            <span class="login-text">Login</span>
+            <span class="login-text">{{'login_page.login' | translate}}</span>
             <div class="row input-label" [class.error]="this.computeControlValidity(emailControl)">
-                <span>E-mail:</span>
+                <span>{{'login_page.email' | translate}}:</span>
                 <span *ngIf="this.computeControlValidity(emailControl) && emailControl.hasError('required')">
-                    *required
+                    *{{'common.required' | translate}}
                 </span>
             </div>
             <input formControlName="email" type="email" placeholder="example@mail.com" name="email">
             <div class="row input-label" [class.error]="this.computeControlValidity(passwordControl)">
-                <span>Password:</span>
+                <span>{{'login_page.password' | translate}}:</span>
                 <span *ngIf="this.computeControlValidity(passwordControl) && passwordControl.hasError('required')">
-                    *required
+                    *{{'common.required' | translate}}
                 </span>
             </div>
             <input formControlName="password" type="password" placeholder="*********" name="password">
             <div class="actions">
-                <a href="/">Forgot password?</a>
-                <button (click)="onLogin()" class="login-button" [disabled]="formGroup.invalid">Login</button>
+                <a href="/">{{'login_page.forgot_password' | translate}}</a>
+                <button (click)="onLogin()" class="login-button"
+                    [disabled]="formGroup.invalid">{{'login_page.login' | translate}}</button>
             </div>
         </div>
     </form>

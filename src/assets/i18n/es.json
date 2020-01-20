@@ -1,0 +1,60 @@
+{
+    "app": {
+        "lang": {
+            "es": "Español",
+            "en": "Inglés"
+        }
+    },
+    "common": {
+        "cancel": "cancelar",
+        "required": "obligatorio",
+        "save": "guardar",
+        "edit": "editar",
+        "delete": "borrar",
+        "choose_language": "Elige el idioma"
+    },
+    "header": {
+        "welcome": "Bienvenido",
+        "user_login": "Acceso de usuario",
+        "log_off": "Salir"
+    },
+    "footer": {
+        "copyright": "Derechos reservados"
+    },
+    "main_section": {
+        "text_to_search": "Texto a buscar",
+        "add_course": "Agregar curso"
+    },
+    "breadcrumbs_navbar": {
+        "courses": "Cursos"
+    },
+    "login_page": {
+        "login": "Acceso",
+        "email": "Correo electrónico",
+        "password": "Contraseña",
+        "forgot_password": "¿Olvidaste tu contraseña?"
+    },
+    "page_not_found": {
+        "page_not_found": "Página no encontrada"
+    },
+    "add_course_component": {
+        "title": "Título",
+        "max_length_error": "la máxima longitud es de {{requiredLength}} caracteres",
+        "add_title": "Agregar título",
+        "description": "Descripción",
+        "add_description": "Agregar descripción",
+        "date": "Fecha",
+        "date_format_error": "La fecha debe de seguir el formato <i>dd/mm/yyyy</i>.",
+        "duration": "Duración",
+        "duration_error": "la longitud debe de ser un número entero mayor que cero.",
+        "authors": "Autores",
+        "authors_error": "el curso debe de tener al menos {{requiredItems}} autor(es)."
+    },
+    "courses_list_component": {
+        "load_more": "Cargar más",
+        "no_data": "Sin información. Pero puedes añadir un nuevo curso"
+    },
+    "duration_input_component": {
+        "minutes": "minutos"
+    }
+}

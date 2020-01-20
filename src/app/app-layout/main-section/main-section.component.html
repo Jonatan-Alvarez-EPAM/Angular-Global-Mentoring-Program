@@ -2,10 +2,12 @@
     <app-breadcrumbs-navbar></app-breadcrumbs-navbar>
     <div class="container">
         <div>
-            <input [formControl]="searchInputControl" type="text" placeholder="Text to search">
+            <input [formControl]="searchInputControl" type="text"
+                [placeholder]="'main_section.text_to_search' | translate">
         </div>
         <div class="align-right">
-            <button class="add-course-button" (click)="onAddCourse()">+ Add course</button>
+            <button class="add-course-button" (click)="onAddCourse()">+
+                {{'main_section.add_course' | translate}}</button>
         </div>
 
         <app-courses-list [filterTitle]="titleToSearch"></app-courses-list>

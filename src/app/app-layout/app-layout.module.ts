@@ -6,6 +6,8 @@ import { MainSectionComponent } from './main-section/main-section.component';
 import { AppComponentsModule } from '../app-components/app-components.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppServicesModule } from '../app-services/app-services.module';
+import { TranslateModule } from '@ngx-translate/core';
+import { MatSelectModule } from '@angular/material/select'
 
 @NgModule({
   declarations: [HeaderComponent, FooterComponent, MainSectionComponent],
@@ -15,6 +17,8 @@ import { AppServicesModule } from '../app-services/app-services.module';
     FormsModule,
     ReactiveFormsModule,
     AppServicesModule,
+    TranslateModule,
+    MatSelectModule,
   ],
   exports: [HeaderComponent, FooterComponent, MainSectionComponent],
 })
