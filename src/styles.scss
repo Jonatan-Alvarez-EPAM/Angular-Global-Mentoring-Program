@@ -8,6 +8,13 @@
   flex-direction: row;
 }
 
+@mixin ng-invalid {
+  border: solid 2px var(--error);
+  border-radius: 3px;
+  color: inherit;
+  outline: none;
+}
+
 html, body {
   height: 100%;
   margin: 0;
@@ -15,6 +22,21 @@ html, body {
 
 button {
   border-color: transparent;
+}
+
+.ng-pristine {
+  border-radius: 3px;
+  border: solid 1px #d9dbe3;
+  text-indent: 15px;
+  color:inherit;
+}
+
+.ng-invalid:not(.ng-untouched):not(form) {
+ @include ng-invalid;
+}
+
+.error {
+  color: var(--error);
 }
 
 .heading-promo-H1-72-px {
@@ -143,4 +165,8 @@ button {
   --pear: #e2f86a;
   --seafoam-blue: #76cdd8;
   --white: #ffffff;
+  --error: #ff0000;
 }
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

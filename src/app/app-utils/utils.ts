@@ -1,3 +1,5 @@
+import { AbstractControl } from '@angular/forms';
+
 /** Miscellaneous utils used through all the app. */
 
 export function todayWithoutTime(): Date {
@@ -10,4 +12,8 @@ export function yesterdayWithoutTime(): Date {
 
 export function tomorrowWithoutTime(): Date {
     return new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate() + 1);
+}
+
+export function computeControlValidity(control: AbstractControl): boolean {
+    return control.invalid && (control.touched || control.dirty);
 }

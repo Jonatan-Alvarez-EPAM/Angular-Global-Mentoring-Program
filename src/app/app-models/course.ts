@@ -1,3 +1,5 @@
+import { Author } from './author';
+
 /** App-wide model to handle courses info. */
 export interface Course {
     id: string;
@@ -6,4 +8,5 @@ export interface Course {
     length: number;
     description: string;
     isTopRated: boolean;
+    authors: Author[];
 }

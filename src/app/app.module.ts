@@ -12,6 +12,8 @@ import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { EffectsModule } from '@ngrx/effects';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -19,11 +21,14 @@ import { EffectsModule } from '@ngrx/effects';
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppLayoutModule,
     AppComponentsRoutingModule,
     AppRoutingModule,
     HttpClientModule,
     AppComponentsModule,
+    FormsModule,
+    ReactiveFormsModule,
     StoreModule.forRoot({}, {
       runtimeChecks: {
         strictStateImmutability: true,
@@ -34,6 +39,7 @@ import { EffectsModule } from '@ngrx/effects';
     }),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
     EffectsModule.forRoot([]),
+    BrowserAnimationsModule,
   ],
   providers: [
     { provide: 'Storage', useValue: localStorage },
