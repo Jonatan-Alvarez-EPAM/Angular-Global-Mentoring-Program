@@ -2,6 +2,8 @@ import { Injectable, Inject } from '@angular/core';
 import { Course } from '@app/app-models';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { OrderByPipe } from '@app/app-pipes';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +15,8 @@ export class CoursesService {
   ) { }
 
   list(params: { start?: string, count?: string, textFragment?: string }): Observable<Course[]> {
-    return this.httpClient.get<Course[]>(`${this.BASE_URL}/courses`, { params });
+    return this.httpClient.get<Course[]>(`${this.BASE_URL}/courses`, { params })
+      .pipe(map((courses: Course[]) => new OrderByPipe().transform(courses)));
   }
 
   create(courseInfo: Course): Observable<Course> {
@@ -27,8 +30,8 @@ export class CoursesService {
     });
   }
 
-  get(idCourse: string): Observable<Course> {
-    return this.httpClient.get<Course>(`${this.BASE_URL}/courses`, { params: { id: idCourse } });
+  get(idCourse: string): Observable<Course[]> {
+    return this.httpClient.get<Course[]>(`${this.BASE_URL}/courses`, { params: { id: idCourse } });
   }
 
   update(courseInfo: Course): Observable<Course> {
@@ -44,6 +47,7 @@ export class CoursesService {
   }
 
   delete(idCourse: string): Observable<Course> {
+    // ToDo: Implement deleteById in BE.
     return this.httpClient.delete<Course>(`${this.BASE_URL}/courses`, { params: { id: idCourse } });
   }
 }
