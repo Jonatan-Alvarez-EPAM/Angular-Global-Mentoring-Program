@@ -1,8 +1,12 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Course } from '@app/app-models';
 import { Router, ActivatedRoute } from '@angular/router';
-import { CoursesService } from '@app/app-services';
-import { map } from 'rxjs/operators';
+import { filter } from 'rxjs/operators';
+import { Store } from '@ngrx/store';
+import { AppState } from '@app/store';
+import * as CoursesActions from '@app/store/actions/courses.actions';
+import { getCurrentCourseStatus } from '@app/store/selectors/courses.selectors';
+import { Observable } from 'rxjs';
 
 enum SavingModes { CREATE, UPDATE }
 
@@ -13,10 +17,8 @@ enum SavingModes { CREATE, UPDATE }
 })
 export class AddCourseComponent implements OnInit {
 
-  @Output() cancel = new EventEmitter<void>();
-  @Output() save = new EventEmitter<Course>();
-
   private savingMode = SavingModes.CREATE;
+  private readonly courseInfo$: Observable<Course> = this.store.select(getCurrentCourseStatus);
   id?: string;
   name: string;
   description: string;
@@ -27,15 +29,16 @@ export class AddCourseComponent implements OnInit {
   constructor(
     private readonly router: Router,
     private readonly route: ActivatedRoute,
-    private readonly coursesService: CoursesService,
+    private readonly store: Store<AppState>,
   ) { }
 
   ngOnInit() {
     this.id = this.route.snapshot.paramMap.get('id');
     if (this.id) {
       this.savingMode = SavingModes.UPDATE;
-      this.coursesService.get(this.id)
-        .pipe(map(courses => courses[0]))
+      this.store.dispatch(CoursesActions.getCourse({ courseId: this.id }));
+
+      this.courseInfo$.pipe(filter(Boolean))
         .subscribe((response: Course) => {
           this.name = response.name;
           this.length = response.length;
@@ -56,24 +59,16 @@ export class AddCourseComponent implements OnInit {
       description: this.description,
       isTopRated: false,
     };
-    this.save.emit(this.courseInfo);
 
     if (this.savingMode === SavingModes.CREATE) {
-      this.coursesService.create(this.courseInfo)
-        .subscribe({
-          error: (error) => { console.error('Something went wrong', error); }
-        });
+      this.store.dispatch(CoursesActions.addCourse({ courseInfo: this.courseInfo }));
     } else {
-      this.coursesService.update(this.courseInfo)
-        .subscribe({
-          error: (error) => { console.error('Something went wrong', error); }
-        });
+      this.store.dispatch(CoursesActions.editCourse({ courseInfo: this.courseInfo }));
     }
     this.router.navigate(['/courses']);
   }
 
   onCancel() {
-    this.cancel.emit();
     this.router.navigate(['/courses']);
   }
 
