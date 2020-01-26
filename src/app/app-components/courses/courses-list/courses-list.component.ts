@@ -48,10 +48,10 @@ export class CoursesListComponent implements OnInit {
   }
 
   private getPage(): string {
-    return String(this.pageSize * this.pageIndex++);
+    return (this.pageSize * this.pageIndex++).toString();
   }
 
   private nextPage(): string {
-    return String(this.pageSize);
+    return (this.pageSize).toString();
   }
 }

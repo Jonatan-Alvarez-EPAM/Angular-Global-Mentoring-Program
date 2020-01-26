@@ -14,8 +14,8 @@ export class CoursesService {
     @Inject('BASE_URL') private readonly BASE_URL: string
   ) { }
 
-  list(params?: CoursesServiceListParams): Observable<Course[]> {
-    return this.httpClient.get<Course[]>(`${this.BASE_URL}/courses`, { params: params as CoursesServiceIndexedParams })
+  list(params: { start?: string, count?: string, textFragment?: string }): Observable<Course[]> {
+    return this.httpClient.get<Course[]>(`${this.BASE_URL}/courses`, { params })
       .pipe(map((courses: Course[]) => new OrderByPipe().transform(courses)));
   }
 
@@ -30,8 +30,8 @@ export class CoursesService {
     });
   }
 
-  get(idCourse: string): Observable<Course> {
-    return this.httpClient.get<Course>(`${this.BASE_URL}/courses`, { params: { id: idCourse } });
+  get(idCourse: string): Observable<Course[]> {
+    return this.httpClient.get<Course[]>(`${this.BASE_URL}/courses`, { params: { id: idCourse } });
   }
 
   update(courseInfo: Course): Observable<Course> {
@@ -50,14 +50,4 @@ export class CoursesService {
     // ToDo: Implement deleteById in BE.
     return this.httpClient.delete<Course>(`${this.BASE_URL}/courses`, { params: { id: idCourse } });
   }
-}
-
-export interface CoursesServiceListParams {
-  start?: string;
-  count?: string;
-  textFragment?: string;
-}
-
-interface CoursesServiceIndexedParams {
-  [param: string]: string | string[];
 }

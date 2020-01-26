@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Course } from '@app/app-models';
-import { Store } from '@ngrx/store';
+import { select, Store } from '@ngrx/store';
 import { AppState } from '@app/store';
 import * as CoursesActions from '@app/store/actions/courses.actions';
 import { getCurrentCourseStatus } from '@app/store/selectors/courses.selectors';
@@ -17,8 +17,9 @@ import { Observable } from 'rxjs';
 export class BreadcrumbsNavbarComponent implements OnInit {
 
   courseId?: string;
-  courseName$: Observable<string> = this.store.select(getCurrentCourseStatus)
+  courseName$: Observable<string> = this.store
     .pipe(
+      select(getCurrentCourseStatus),
       filter(Boolean),
       map((course: Course) => course.name));
 

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { CoursesService, CoursesServiceListParams } from '@app/app-services';
+import { CoursesService } from '@app/app-services';
 import { map, catchError, switchMap } from 'rxjs/operators';
 import { of as observableOf } from 'rxjs';
 import { CoursesActionTypes } from '@app/store/actions/courses.actions';
@@ -15,7 +15,7 @@ export class CoursesEffects {
                 ofType(CoursesActionTypes.GetCourse),
                 switchMap((action: { courseId: string }) => this.coursesService.get(action.courseId)
                     .pipe(
-                        map(response => ({ type: CoursesActionTypes.GetCourseSuccess, payload: response[0] })),
+                        map(([course]) => ({ type: CoursesActionTypes.GetCourseSuccess, payload: course })),
                         catchError(() => observableOf({ type: CoursesActionTypes.GetCourseError })),
                     ))
             )
@@ -25,7 +25,7 @@ export class CoursesEffects {
         createEffect(() =>
             this.actions$.pipe(
                 ofType(CoursesActionTypes.ListCourses),
-                switchMap((action: CoursesServiceListParams) => this.coursesService.list(action)
+                switchMap((action: { start?: string, count?: string, textFragment?: string }) => this.coursesService.list(action)
                     .pipe(
                         map(response => ({ type: CoursesActionTypes.ListCoursesSuccess, payload: response })),
                         catchError(() => observableOf({ type: CoursesActionTypes.ListCoursesError })),

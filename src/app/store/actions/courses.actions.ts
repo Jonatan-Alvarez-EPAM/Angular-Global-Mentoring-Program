@@ -1,6 +1,5 @@
 import { createAction, props } from '@ngrx/store';
 import { Course } from '@app/app-models';
-import { CoursesServiceListParams } from '@app/app-services';
 
 export enum CoursesActionTypes {
     GetCourse = '[Courses API] Get course',
@@ -37,7 +36,7 @@ export const getCourseError = createAction(
 
 // List courses actions.
 export const listCourses = createAction(
-    CoursesActionTypes.ListCourses, props<CoursesServiceListParams>()
+    CoursesActionTypes.ListCourses, props<{ start?: string, count?: string, textFragment?: string }>()
 );
 export const listCoursesSuccess = createAction(
     CoursesActionTypes.ListCoursesSuccess, props<{ payload: Course[] }>()
